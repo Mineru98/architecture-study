@@ -11,9 +11,13 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
   const config = new DocumentBuilder()
-    .setTitle("ABAC Study Project")
-    .setDescription("ABAC 기준으로 단일 구조 학습 사례를 프론트엔드와 백엔드 예시로 정리한다.")
-    .setVersion("0.1.0")
+    .setTitle("ABAC 쇼핑몰 접근 제어 API")
+    .setDescription(
+      "속성 기반 접근 제어(ABAC) 패턴을 쇼핑몰 도메인에 적용한 학습용 백엔드. " +
+      "정책 엔진(PDP), 사용자/상품/환불 도메인, 접근 평가 API, 감사 로그를 포함합니다. " +
+      "x-user-id 헤더로 사용자를 식별하고, x-trusted-network: true 헤더로 신뢰 네트워크를 시뮬레이션합니다.",
+    )
+    .setVersion("1.0.0")
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup("api/docs", app, document);
