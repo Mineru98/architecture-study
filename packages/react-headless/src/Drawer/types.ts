@@ -1,0 +1,10 @@
+export type {
+  DialogRootProps as DrawerRootProps,
+  DialogTriggerProps as DrawerTriggerProps,
+  DialogBackdropProps as DrawerBackdropProps,
+  DialogPositionerProps as DrawerPositionerProps,
+  DialogContentProps as DrawerContentProps,
+  DialogTitleProps as DrawerTitleProps,
+  DialogDescriptionProps as DrawerDescriptionProps,
+  DialogCloseButtonProps as DrawerCloseButtonProps
+} from "../Dialog/types";
