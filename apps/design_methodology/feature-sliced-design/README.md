@@ -1,39 +1,71 @@
-# 기능 슬라이스 설계(FSD) 학습 가이드
+# Feature-Sliced Design 설계 가이드
 
-## 목적
-프론트엔드를 기능 단위로 계층화해 대형 UI 코드에서 책임 경계를 유지한다.
+## 1. 개념 요약
 
-## 핵심 개념
-- app, pages, processes, widgets, features, entities, shared로 레이어를 나눈다.
-- 의존은 상위에서 하위 방향으로만 흐르도록 제한한다.
-- 기능별로 독립 테스트와 배포 준비를 쉽게 한다.
+app, pages, widgets, features, entities, shared 레이어로 프론트엔드 책임 경계를 유지한다.
 
-## 프론트엔드 예시 구조
+## 2. 언제 선택하는가
+
+- 프론트엔드 규모가 커지고 기능 단위 변경이 잦을 때
+- 레이어별 의존 규칙을 명시적으로 관리하고 싶을 때
+
+## 3. 핵심 설계 포인트
+
+- 의존은 상위에서 하위 방향으로만 흐른다.
+- features와 entities를 섞지 않는다.
+- shared는 최소 공통 요소만 둔다.
+
+## 4. 프론트엔드 적용 포인트
+
+- pages, widgets, features, entities, shared 구조를 지킨다.
+- 기능별 API, model, ui를 한 레이어 안에서 관리한다.
+
+- 이 workspace에서는 `frontend` 대시보드에서 해당 패턴을 선택하고 사례 메모를 기록하도록 구성한다.
+
+## 5. 백엔드 적용 포인트
+
+- 백엔드는 프론트 기능 경계와 맞는 응답을 제공한다.
+- 기능 단위의 API 계약을 유지한다.
+
+- 이 workspace에서는 `backend` API가 패턴 개요, 스터디 사례, 메모 저장용 엔드포인트를 제공한다.
+
+## 6. 스터디 시나리오
+
+학습 기록 앱에서 등록, 연속 학습, 리포트 생성 기능을 feature 단위로 나누고 공용 엔티티를 재사용한다.
+
+## 7. 추천 구조
+
 ```text
 frontend/
   src/app
-  src/pages
-  src/widgets
   src/features
-  src/entities
-  src/shared
+  src/shared/api
+  src/shared/store
+  src/shared/constants
 ```
 
-## 백엔드 예시 구조
 ```text
 backend/
-  src/apis
-  src/features
-  src/entities
-  src/common
+  src/main.ts
+  src/app.module.ts
+  src/study/study.controller.ts
+  src/study/study.service.ts
+  src/study/study.data.ts
 ```
 
-## 간단한 스터디 시나리오
-학습 기록 앱에서 `학습 기록 등록`, `연속 학습`, `리포트 생성` 기능을 각각 feature로 분리한다.  
-각 기능은 공유 엔티티와 API 모듈을 소비해 화면에서 독립적으로 동작한다.
+## 8. 구현 체크리스트
 
-## 추천 기술 연결
-- 프론트엔드: zustand, react-query, react-hook-form, react-error-boundary
-- 백엔드: @nestjs/core, @nestjs/typeorm, class-validator, class-transformer
-- 추가: qs(필터 파라미터), dayjs(날짜 집계)
+- 레이어 규칙을 먼저 합의한다.
+- entities와 features 경계를 리뷰 기준으로 삼는다.
+- 공유 모듈 남용을 막는다.
 
+## 9. 주의점
+
+- 레이어 의미를 모르고 폴더만 따라 하면 실패한다.
+- shared가 만능 폴더가 되지 않도록 제한해야 한다.
+
+## 10. 연결 포인트
+
+- 상위 가이드: [Design Methodology Study Workspace](../README.md)
+- 기준 질문: 시스템을 어떤 책임 경계로 나눌 것인가
+- 예시 도메인: 구조화 설계 의사결정

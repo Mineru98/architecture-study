@@ -1,29 +1,71 @@
-# CQRS
+# CQRS 설계 가이드
 
-## 개념
-CQRS는 쓰기(Command)와 조회(Query)의 모델을 분리해 성능과 확장성을 높인다.
-- Command 모델: 상태 변경 중심
-- Query 모델: 조회 최적화 중심
+## 1. 개념 요약
 
-## 언제 쓰는지
-- 조회 패턴과 쓰기 패턴이 전혀 다른 응답 요구를 가질 때
-- 읽기 부하와 쓰기 부하를 독립적으로 튜닝해야 할 때
-- 감사 로그/권한 검증이 쓰기 흐름에 강하게 걸려 있을 때
+쓰기(Command)와 조회(Query) 모델을 분리해 서로 다른 최적화 방향을 취한다.
 
-## 기본 데이터 흐름
-1. Command 요청은 Command Handler로 전달
-2. 유효성 검증 후 데이터 상태 변경
-3. 변경 이벤트를 기반으로 조회 모델 갱신 또는 동기화
-4. Query 요청은 읽기 전용 모델에서 빠른 응답 제공
+## 2. 언제 선택하는가
 
-## NestJS + React 예시 구상
-- 시나리오: 퀴즈 풀이 제출과 점수 랭킹 조회 분리
-- NestJS: `SubmitQuizCommand`, `GetRankingQuery`를 별도 핸들러로 분리
-- React: 점수 제출 폼은 커맨드 API를 호출하고, 랭킹 화면은 별도 쿼리 API 호출
-- 추후 캐시/검색 인덱스 확장 시 Query 모델을 독립적으로 최적화
+- 조회와 쓰기 요구가 명확히 다를 때
+- 랭킹, 대시보드처럼 조회 최적화가 중요한 경우
 
-## 스터디 범위
-- Command/Query 분할 기준 설계
-- 이벤트 브릿지(저장소 갱신, 프로젝션) 학습
-- 낙관적/비동기 일관성 고려
-- 하나의 도메인(퀴즈 결과/랭킹)에서 API를 이원화하여 구현
+## 3. 핵심 설계 포인트
+
+- Command와 Query를 별도 계약으로 다룬다.
+- 쓰기 이후 읽기 모델 갱신 전략을 정한다.
+- 비동기 일관성 여부를 사용자가 이해할 수 있어야 한다.
+
+## 4. 프론트엔드 적용 포인트
+
+- 제출 폼과 조회 화면을 अलग힌 API로 소비한다.
+- 낙관적 UI와 조회 갱신 타이밍을 명시한다.
+
+- 이 workspace에서는 `frontend` 대시보드에서 해당 패턴을 선택하고 사례 메모를 기록하도록 구성한다.
+
+## 5. 백엔드 적용 포인트
+
+- Command Handler와 Query Handler를 분리한다.
+- Projection 업데이트와 읽기 저장소 최적화를 설계한다.
+
+- 이 workspace에서는 `backend` API가 패턴 개요, 스터디 사례, 메모 저장용 엔드포인트를 제공한다.
+
+## 6. 스터디 시나리오
+
+퀴즈 제출과 랭킹 조회를 분리해 쓰기 정확성과 조회 성능 요구가 어떻게 달라지는지 비교한다.
+
+## 7. 추천 구조
+
+```text
+frontend/
+  src/app
+  src/features
+  src/shared/api
+  src/shared/store
+  src/shared/constants
+```
+
+```text
+backend/
+  src/main.ts
+  src/app.module.ts
+  src/study/study.controller.ts
+  src/study/study.service.ts
+  src/study/study.data.ts
+```
+
+## 8. 구현 체크리스트
+
+- Command와 Query 계약을 분리한다.
+- 프로젝션 갱신 지연을 문서화한다.
+- 쓰기 검증 규칙을 강화한다.
+
+## 9. 주의점
+
+- 단순한 CRUD에는 과한 구조일 수 있다.
+- 읽기 모델 지연을 숨기면 사용자 혼란이 생긴다.
+
+## 10. 연결 포인트
+
+- 상위 가이드: [Implementation Pattern Study Workspace](../README.md)
+- 기준 질문: 코드 수준에서 관심사를 어떻게 나눌 것인가
+- 예시 도메인: 코드 패턴 비교 학습

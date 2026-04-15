@@ -1,40 +1,71 @@
-# 레이어드 아키텍처 학습 가이드
+# Layered Architecture 설계 가이드
 
-## 목적
-요구사항을 표현 계층, 애플리케이션 계층, 도메인 계층, 인프라 계층으로 분리해 변경 전파를 줄이고, 유지보수 흐름을 단순화한다.
+## 1. 개념 요약
 
-## 핵심 개념
-- 계층은 상위 계층이 하위 계층을 호출만 하고 인프라를 직접 의존하지 않는다.
-- 의존 방향이 단방향으로 고정되어 테스트가 쉬워진다.
-- 계층 사이 인터페이스를 기준으로 구현을 교체할 수 있다.
+표현, 애플리케이션, 도메인, 인프라 계층을 분리해 변경 전파를 줄인다.
 
-## 프론트엔드 예시 구조
+## 2. 언제 선택하는가
+
+- 도메인 복잡도가 높지 않고 계층적 설명이 필요한 팀일 때
+- CRUD 중심 기능을 안정적으로 분리하고 싶을 때
+
+## 3. 핵심 설계 포인트
+
+- 상위 계층이 하위 계층만 의존한다.
+- 계층별 책임을 명확하게 문서화한다.
+- 컨트롤러와 리포지토리 사이에 서비스 계층을 고정한다.
+
+## 4. 프론트엔드 적용 포인트
+
+- pages -> widgets -> services 흐름으로 책임을 나눈다.
+- 화면 로직과 API 호출 로직을 분리한다.
+
+- 이 workspace에서는 `frontend` 대시보드에서 해당 패턴을 선택하고 사례 메모를 기록하도록 구성한다.
+
+## 5. 백엔드 적용 포인트
+
+- controller -> service -> repository -> infrastructure 구조를 유지한다.
+- 계층 경계를 넘는 유틸 사용을 제한한다.
+
+- 이 workspace에서는 `backend` API가 패턴 개요, 스터디 사례, 메모 저장용 엔드포인트를 제공한다.
+
+## 6. 스터디 시나리오
+
+교육 플랫폼에서 회원 조회, 수강 등록, 수료증 발급 기능을 계층별로 나눠 변경 영향 범위를 학습한다.
+
+## 7. 추천 구조
+
 ```text
 frontend/
-  src/pages
-  src/widgets
-  src/services
+  src/app
   src/features
-  src/lib/api
-  src/types
+  src/shared/api
+  src/shared/store
+  src/shared/constants
 ```
 
-## 백엔드 예시 구조
 ```text
 backend/
-  src/controllers
-  src/services
-  src/repositories
-  src/entities
-  src/infrastructure
+  src/main.ts
+  src/app.module.ts
+  src/study/study.controller.ts
+  src/study/study.service.ts
+  src/study/study.data.ts
 ```
 
-## 간단한 스터디 시나리오
-관리자 전용 대시보드가 있는 교육 플랫폼에서 회원 조회, 수강 등록, 수료증 발급 API를 구현한다.  
-프론트는 페이지 -> 위젯 -> 서비스 호출 계층으로 분리하고, 백엔드는 컨트롤러-서비스-리포지토리로 분리해 책임이 엉키지 않도록 구성한다.
+## 8. 구현 체크리스트
 
-## 추천 기술 연결
-- 프론트엔드: react, react-dom, react-router, axios, @tanstack/react-query
-- 백엔드: @nestjs/core, @nestjs/platform-express, @nestjs/typeorm, class-validator
-- 추가: react-hook-form(폼 바인딩), class-transformer(DTO 변환)
+- 계층 정의 문서를 먼저 작성한다.
+- 하위 계층 인터페이스를 고정한다.
+- 직접 의존 금지 규칙을 코드 리뷰 체크포인트로 둔다.
 
+## 9. 주의점
+
+- 도메인이 커지면 서비스 계층이 비대해질 수 있다.
+- 단순한 계층 분리는 기능 응집도를 떨어뜨릴 수 있다.
+
+## 10. 연결 포인트
+
+- 상위 가이드: [Design Methodology Study Workspace](../README.md)
+- 기준 질문: 시스템을 어떤 책임 경계로 나눌 것인가
+- 예시 도메인: 구조화 설계 의사결정

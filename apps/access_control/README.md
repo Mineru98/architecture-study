@@ -1,60 +1,54 @@
-# Access Control Study Guide
+# Access Control Study Workspace
 
-`access_control`은 접근 제어 패턴을 쇼핑몰 서비스 예시로 이해하기 위한 학습 문서 모음이다.
+쇼핑몰 백오피스와 판매자 콘솔을 기준으로 접근 제어 모델과 권한 구조를 단일 패턴별로 학습하는 workspace.
 
-## 학습 목표
+## 스터디 질문
 
-- 쇼핑몰에서 필요한 권한을 리소스 단위로 나눠 본다.
-- 제어 모델과 권한 구조를 분리해서 이해한다.
-- React + NestJS 예시에 어떻게 연결되는지 본다.
+- 누가 어떤 리소스에 언제 접근할 수 있는가
+- 기준 도메인: 쇼핑몰 권한 설계
+- 사용자 맥락: platform-admin, seller, cs-agent 같은 운영 주체가 동시에 쓰는 시스템
 
-## 예시 서비스 가정
-
-- 하나의 쇼핑몰 플랫폼을 운영한다.
-- 사용자 유형은 고객, 판매자, 운영자, 정산 담당자, 고객센터 상담원으로 나뉜다.
-- 핵심 리소스는 상품, 주문, 결제, 환불, 쿠폰, 리뷰, 정산, 배송 정보다.
-
-## 공통 권한 묶음
-
-- 상품: `product.read`, `product.create`, `product.update`, `product.publish`, `product.delete`
-- 주문: `order.read`, `order.cancel`, `order.confirm`, `order.export`
-- 결제/환불: `payment.read`, `refund.request`, `refund.approve`, `refund.reject`
-- 리뷰: `review.read`, `review.reply`, `review.hide`
-- 쿠폰/프로모션: `promotion.read`, `promotion.create`, `promotion.update`, `promotion.publish`
-- 정산: `settlement.read`, `settlement.approve`, `settlement.export`
-- 운영: `user.manage`, `role.manage`, `audit.read`
-
-## 제어 모델
+## 포함 패턴
 
 - [RBAC](./rbac/README.md)
 - [ABAC](./abac/README.md)
 - [ReBAC](./rebac/README.md)
+- [Flat Structure](./flat/README.md)
+- [Hierarchical Structure](./hierarchical/README.md)
+- [Delegation Structure](./delegation/README.md)
+- [Graph-Based Structure](./graph-based/README.md)
 
-## 권한 구조
+## 예시 시스템
 
-- [Flat](./flat/README.md)
-- [Hierarchical](./hierarchical/README.md)
-- [Delegation](./delegation/README.md)
-- [Graph-Based](./graph-based/README.md)
+- 프론트엔드: React + Vite + styled-components + React Query + Zustand + React Hook Form
+- 백엔드: NestJS + ConfigModule + Throttler + Swagger + class-validator
+- 공통 UI: `@vibe-architecture/react`, `@vibe-architecture/css`
+- 시나리오: 상품, 주문, 환불, 정산, 리뷰 리소스에 대한 접근 정책을 비교하고, 선택한 패턴에 맞춘 권한 설계 결정을 기록한다.
 
-## 권장 학습 순서
+## 워크스페이스 구조
 
-1. RBAC
-2. ABAC
-3. ReBAC
-4. Flat
-5. Hierarchical
-6. Delegation
-7. Graph-Based
+```text
+access_control/
+  frontend/
+  backend/
+  rbac/
+  abac/
+  rebac/
+  flat/
+  hierarchical/
+  delegation/
+  graph-based/
+```
 
-## 구현 전제
+## 실행 메모
 
-- 루트 `package.json`에서 Bun workspace로 공통 의존성을 관리한다.
-- 프론트엔드는 React, Zustand, React Query 기준으로 본다.
-- 백엔드는 NestJS, Passport, JWT 기준으로 본다.
-- 예시는 쇼핑몰 관리자 백오피스와 판매자 콘솔을 함께 가진다고 가정한다.
+```bash
+bun --filter @architecture-study/access-control run backend:dev
+bun --filter @architecture-study/access-control run frontend:dev
+```
 
-## 레거시 조합형 예시
+## 학습 순서 제안
 
-기존 `flat-rbac`, `hierarchical-rbac`, `hybrid-rbac` 폴더는 조합형 비교 자료다.
-단일 패턴 문서와 같은 쇼핑몰 예시를 쓰되, 역할 상속 방식 차이를 비교하는 용도로 본다.
+1. RBAC로 기본 역할 경계 정리
+2. ABAC/ReBAC로 문맥 규칙 확장
+3. Flat/Hierarchical/Delegation/Graph-Based로 권한 구조 선택

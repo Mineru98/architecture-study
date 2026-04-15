@@ -1,29 +1,71 @@
-# RESTful 패턴
+# RESTful 설계 가이드
 
-## 개념
-RESTful은 자원(Resource) 단위로 URL과 HTTP 메서드를 정렬해 CRUD 중심 API를 구성한다.
-- 명사형 리소스 경로, HTTP 메서드 의미 일치
-- 상태 코드/헤더 표준의 일관적 사용
+## 1. 개념 요약
 
-## 언제 쓰는지
-- 웹 클라이언트와 API 표준이 중요하고 범용성이 필요한 경우
-- 모바일/웹/타 시스템이 동일 엔드포인트를 공유할 때
-- CRUD가 중심인 관리형 기능에서 빠르게 성숙한 API를 원할 때
+자원 중심 URL과 HTTP 메서드 규약으로 CRUD와 범용 API 계약을 만든다.
 
-## 기본 데이터 흐름
-1. Client에서 자원 중심 URL로 요청
-2. API Gateway/Controller가 라우팅
-3. Service에서 인증/권한/검증 후 Model 처리
-4. 결과를 DTO로 반환
+## 2. 언제 선택하는가
 
-## NestJS + React 예시 구상
-- 시나리오: 학습 항목 관리 API
-- NestJS: `GET /lessons`, `POST /lessons`, `PATCH /lessons/:id`, `DELETE /lessons/:id`
-- React: React Query로 목록 조회/생성/삭제 캐시 동기화
-- axios 인터셉터로 인증 헤더와 에러 처리 공통화
+- 범용성이 중요하고 여러 클라이언트가 동일 API를 소비할 때
+- CRUD 중심 관리 기능을 빠르게 안정화하고 싶을 때
 
-## 스터디 범위
-- 리소스 설계 규칙과 버전 관리
-- 상태 코드/에러 포맷 표준화
-- 프론트-백엔드 계약 기반 개발
-- 한 기능에서 CRUD 흐름을 완주해 검증
+## 3. 핵심 설계 포인트
+
+- 명사형 리소스 경로를 사용한다.
+- HTTP 메서드 의미와 상태 코드를 일관되게 맞춘다.
+- 에러 포맷과 버전 관리 전략을 문서화한다.
+
+## 4. 프론트엔드 적용 포인트
+
+- React Query와 Axios로 CRUD 흐름을 단순하게 연결한다.
+- 리소스 중심 캐시 키를 유지한다.
+
+- 이 workspace에서는 `frontend` 대시보드에서 해당 패턴을 선택하고 사례 메모를 기록하도록 구성한다.
+
+## 5. 백엔드 적용 포인트
+
+- Controller는 자원 단위 엔드포인트를 제공한다.
+- DTO 검증과 상태 코드 정책을 통일한다.
+
+- 이 workspace에서는 `backend` API가 패턴 개요, 스터디 사례, 메모 저장용 엔드포인트를 제공한다.
+
+## 6. 스터디 시나리오
+
+학습 항목 관리 API에서 목록 조회, 생성, 수정, 삭제를 RESTful하게 구성하고 프론트 캐시 동기화를 비교한다.
+
+## 7. 추천 구조
+
+```text
+frontend/
+  src/app
+  src/features
+  src/shared/api
+  src/shared/store
+  src/shared/constants
+```
+
+```text
+backend/
+  src/main.ts
+  src/app.module.ts
+  src/study/study.controller.ts
+  src/study/study.service.ts
+  src/study/study.data.ts
+```
+
+## 8. 구현 체크리스트
+
+- 리소스 이름과 경로 규칙을 정한다.
+- 상태 코드 표를 만든다.
+- 에러 응답 포맷을 통일한다.
+
+## 9. 주의점
+
+- 액션성 작업을 URL에 무리하게 넣지 않는다.
+- 버전 전략 없이 확장하면 계약이 깨지기 쉽다.
+
+## 10. 연결 포인트
+
+- 상위 가이드: [Integration Study Workspace](../README.md)
+- 기준 질문: 데이터를 어떤 방식으로 연결하고 전달할 것인가
+- 예시 도메인: 시스템 연동 전략

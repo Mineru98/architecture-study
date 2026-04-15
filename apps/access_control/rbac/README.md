@@ -1,72 +1,71 @@
-# RBAC
+# RBAC 설계 가이드
 
-## 개요
+## 1. 개념 요약
 
-RBAC(Role-Based Access Control)는 사용자에게 직접 권한을 부여하지 않고 역할에 권한을 연결한 뒤, 사용자를 역할에 매핑하는 모델이다.
+역할에 권한을 묶고 사용자를 역할에 매핑해 운영 메뉴와 API 경계를 단순하게 유지한다.
 
-## 쇼핑몰 기준 핵심 역할
+## 2. 언제 선택하는가
 
-- `customer`: 내 주문 조회, 리뷰 작성, 환불 요청
-- `seller`: 자신이 등록한 상품 관리, 자신의 주문 확인, 배송 처리
-- `seller-manager`: 여러 판매자 계정 관리, 상품 승인 요청 처리
-- `cs-agent`: 주문 조회, 환불 접수, 리뷰 블라인드 요청
-- `settlement-manager`: 정산 조회, 정산 승인, 정산 내역 다운로드
-- `platform-admin`: 사용자/역할 관리, 전체 상품/주문/환불 운영
+- 역할 집합이 비교적 안정적일 때
+- 백오피스와 판매자 콘솔 메뉴를 명확히 분리해야 할 때
 
-## 핵심 개념
+## 3. 핵심 설계 포인트
 
-- 사용자와 권한 사이에 역할 계층을 둔다.
-- 권한 변경이 역할 단위로 일어난다.
-- 운영 백오피스와 판매자 콘솔처럼 메뉴가 뚜렷한 서비스에 적합하다.
+- User-Role-Permission 매핑을 명시적으로 유지한다.
+- 역할 변경은 메뉴, API, 감사 로그 정책과 함께 관리한다.
+- 리소스별 예외가 많아지면 ABAC 또는 ReBAC로 확장할 준비를 한다.
 
-## 기본 구성
+## 4. 프론트엔드 적용 포인트
 
-- `User`
-- `Role`
-- `Permission`
-- `UserRole`
-- `RolePermission`
+- 역할별 대시보드 카드와 액션 버튼을 조건부로 노출한다.
+- 선택한 역할에 따라 화면 예시와 허용 액션 목록을 비교한다.
 
-## 쇼핑몰 권한 예시
+- 이 workspace에서는 `frontend` 대시보드에서 해당 패턴을 선택하고 사례 메모를 기록하도록 구성한다.
 
-- `seller`
-  - `product.read`
-  - `product.create`
-  - `product.update`
-  - `order.read`
-  - `order.confirm`
-- `cs-agent`
-  - `order.read`
-  - `payment.read`
-  - `refund.request`
-  - `review.read`
-  - `review.hide`
-- `platform-admin`
-  - `user.manage`
-  - `role.manage`
-  - `audit.read`
-  - `refund.approve`
-  - `settlement.approve`
+## 5. 백엔드 적용 포인트
 
-## React + NestJS 스터디 예시
+- JWT의 roles 클레임을 기반으로 Guard를 적용한다.
+- 역할과 권한 매핑 테이블을 기준으로 엔드포인트 접근을 제한한다.
 
-프론트엔드는 로그인한 사용자의 역할에 따라 판매자 콘솔 메뉴와 운영자 메뉴를 다르게 노출한다.
-백엔드는 JWT의 `roles` 클레임과 `RolesGuard`로 상품, 주문, 환불 API 접근을 제한한다.
+- 이 workspace에서는 `backend` API가 패턴 개요, 스터디 사례, 메모 저장용 엔드포인트를 제공한다.
 
-## 데이터 흐름
+## 6. 스터디 시나리오
 
-1. 사용자가 로그인한다.
-2. 서버가 역할 목록을 포함한 액세스 토큰을 발급한다.
-3. 프론트엔드가 역할 기반 라우트 가드와 버튼 노출 제어를 적용한다.
-4. 백엔드가 역할과 권한 매핑을 확인한다.
+판매자 콘솔에서는 상품 등록과 주문 확인만 허용하고, 운영자 콘솔에서는 환불 승인과 역할 관리 화면을 열어 RBAC의 장점을 확인한다.
 
-## 적합한 사례
+## 7. 추천 구조
 
-- 판매자/운영자 메뉴가 명확히 분리된 쇼핑몰
-- 백오피스 중심 서비스
-- 권한 종류가 비교적 안정적인 B2B 커머스
+```text
+frontend/
+  src/app
+  src/features
+  src/shared/api
+  src/shared/store
+  src/shared/constants
+```
 
-## 한계
+```text
+backend/
+  src/main.ts
+  src/app.module.ts
+  src/study/study.controller.ts
+  src/study/study.service.ts
+  src/study/study.data.ts
+```
 
-- 판매자별 예외 정책이 많아질수록 역할이 폭증한다.
-- "내 상품만 수정 가능" 같은 리소스 문맥 조건을 역할만으로 처리하기 어렵다.
+## 8. 구현 체크리스트
+
+- 역할 카탈로그를 먼저 고정한다.
+- 권한 문자열을 리소스 단위로 정규화한다.
+- 역할 변경 이력을 감사 로그에 남긴다.
+
+## 9. 주의점
+
+- 예외 규칙이 누적되면 역할 폭증이 발생한다.
+- 리소스 소유권 판정은 역할만으로 해결하지 않는다.
+
+## 10. 연결 포인트
+
+- 상위 가이드: [Access Control Study Workspace](../README.md)
+- 기준 질문: 누가 어떤 리소스에 언제 접근할 수 있는가
+- 예시 도메인: 쇼핑몰 권한 설계

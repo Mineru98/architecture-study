@@ -1,31 +1,71 @@
-# MVVM
+# MVVM 설계 가이드
 
-## 개념
-MVVM은 ViewModel을 둬서 View의 상태와 이벤트를 상태 바인딩으로 관리한다.
-- View: 사용자 UI
-- ViewModel: 상태 계산, 이벤트 해석, View 데이터 준비
-- Model: 데이터 소스
+## 1. 개념 요약
 
-## 언제 쓰는지
-- 화면 상태가 많아지고 폼/필터/탭 등 상태 전이가 길어질 때
-- 컴포넌트 내부 로직을 줄이고 테스트 가능한 상태 관리가 필요할 때
-- 입력 기반 화면에서 유효성, 파생 상태 계산이 많이 필요한 경우
+ViewModel을 통해 View 상태와 입력 이벤트를 테스트 가능한 상태 계산으로 분리한다.
 
-## 기본 데이터 흐름
-1. View가 사용자 입력(버튼/폼 입력)을 ViewModel에 이벤트로 전달
-2. ViewModel이 Model API 호출 또는 캐시 갱신
-3. Model 결과를 정제해 View 상태로 변환
-4. View가 상태 변경을 감지해 렌더링
+## 2. 언제 선택하는가
 
-## NestJS + React 예시 구상
-- 시나리오: 일정 등록 마법사
-- NestJS: `StudyPlanController`가 일정 생성/조회 API 제공
-- React: `useStudyPlanViewModel()` 훅이 폼 상태, 에러, 단계별 유효성 관리
-- API 호출 후 Model 응답을 ViewModel에서 화면 바인딩용 형태로 가공
-- React Query + Zustand는 선택적으로 상태 캐시/세션 상태 보조 역할
+- 폼, 필터, 단계형 UI처럼 상태 전이가 많은 경우
+- 컴포넌트 내부 로직을 얇게 만들고 싶은 경우
 
-## 스터디 범위
-- use* 훅을 ViewModel로 볼 때의 설계 규칙
-- 입력 이벤트와 파생 상태 계산 분리
-- 테스트 가능한 ViewModel 단위 테스트
-- 하나의 화면(일정 생성/편집/조회) 단위로 MVVM 구현 실습
+## 3. 핵심 설계 포인트
+
+- View는 입력과 출력만 다룬다.
+- ViewModel이 파생 상태와 이벤트를 계산한다.
+- Model은 데이터 소스로 유지한다.
+
+## 4. 프론트엔드 적용 포인트
+
+- useStudyPlanViewModel 같은 훅으로 상태를 캡슐화한다.
+- 유효성, 에러, 단계 이동 규칙을 ViewModel에 모은다.
+
+- 이 workspace에서는 `frontend` 대시보드에서 해당 패턴을 선택하고 사례 메모를 기록하도록 구성한다.
+
+## 5. 백엔드 적용 포인트
+
+- 백엔드는 화면에 필요한 상태 계산 결과를 제공하되, 최종 표현 가공은 ViewModel이 담당한다.
+- 입력 단위 API를 명확히 분리한다.
+
+- 이 workspace에서는 `backend` API가 패턴 개요, 스터디 사례, 메모 저장용 엔드포인트를 제공한다.
+
+## 6. 스터디 시나리오
+
+일정 등록 마법사에서 단계 전이와 파생 상태를 ViewModel 훅으로 구현해 화면 책임을 줄인다.
+
+## 7. 추천 구조
+
+```text
+frontend/
+  src/app
+  src/features
+  src/shared/api
+  src/shared/store
+  src/shared/constants
+```
+
+```text
+backend/
+  src/main.ts
+  src/app.module.ts
+  src/study/study.controller.ts
+  src/study/study.service.ts
+  src/study/study.data.ts
+```
+
+## 8. 구현 체크리스트
+
+- ViewModel 인터페이스를 먼저 정의한다.
+- 파생 상태와 원본 상태를 구분한다.
+- View는 ViewModel만 소비하게 한다.
+
+## 9. 주의점
+
+- ViewModel이 너무 커지면 새로운 God object가 된다.
+- 화면별로 재사용을 과하게 시도하면 복잡해진다.
+
+## 10. 연결 포인트
+
+- 상위 가이드: [Implementation Pattern Study Workspace](../README.md)
+- 기준 질문: 코드 수준에서 관심사를 어떻게 나눌 것인가
+- 예시 도메인: 코드 패턴 비교 학습

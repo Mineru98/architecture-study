@@ -1,32 +1,71 @@
-# MVC
+# MVC 설계 가이드
 
-## 개념
-MVC는 사용자 요청 처리에서 **Model, View, Controller**를 분리해 역할을 명확히 나누는 패턴이다.
-- Model: 데이터와 비즈니스 규칙
-- View: 화면 렌더링
-- Controller: 입력 처리와 흐름 제어
+## 1. 개념 요약
 
-## 언제 쓰는지
-- 화면 단위가 명확하고 팀 구조도 단순한 초중급 단계에서 빠르게 팀원 이해를 맞출 때
-- CRUD가 중심이고 데이터 가공이 복잡하지 않을 때
-- 기능을 빠르게 분리해 검증하거나 교육용 샘플을 만들 때
+Model, View, Controller를 분리해 요청 처리 흐름을 이해하기 쉽게 만든다.
 
-## 기본 데이터 흐름
-1. React 화면에서 사용자가 액션 트리거
-2. Controller(또는 라우터 핸들러)가 요청을 수신
-3. Service/Model에서 도메인 로직 처리
-4. 결과를 DTO로 변환해 View 계층으로 전달
-5. View가 화면에 반영
+## 2. 언제 선택하는가
 
-## NestJS + React 예시 구상
-- 시나리오: 학습 카드 CRUD
-- NestJS Controller: `GET /study-cards`, `POST /study-cards`
-- Service/Model: 카드 목록 조회, 생성, 유효성 검사
-- React View: `CardListView`, `CardCreateForm`
-- Controller-View 연결: Axios 호출 + React Query 캐시 갱신
+- CRUD 중심 화면을 빠르게 구현할 때
+- 교육용 샘플로 흐름을 명확히 보여주고 싶을 때
 
-## 스터디 범위
-- Controller와 Service 책임 분리 기준 정리
-- DTO/ValidationPipe의 사용 위치 실습
-- React 쪽 View를 최소 책임으로 두는 방법
-- 단일 기능(카드 등록/조회)을 통째로 구현하면서 Controller-Model-View 계층 경계 확인
+## 3. 핵심 설계 포인트
+
+- Controller가 입력 흐름을 제어한다.
+- View는 렌더링에 집중한다.
+- Model은 데이터와 규칙을 담당한다.
+
+## 4. 프론트엔드 적용 포인트
+
+- View 컴포넌트는 최소 책임만 가진다.
+- 컨트롤 흐름은 훅 또는 이벤트 핸들러 계층으로 모은다.
+
+- 이 workspace에서는 `frontend` 대시보드에서 해당 패턴을 선택하고 사례 메모를 기록하도록 구성한다.
+
+## 5. 백엔드 적용 포인트
+
+- NestJS Controller와 Service 경계를 명확히 둔다.
+- DTO 검증과 비즈니스 로직을 분리한다.
+
+- 이 workspace에서는 `backend` API가 패턴 개요, 스터디 사례, 메모 저장용 엔드포인트를 제공한다.
+
+## 6. 스터디 시나리오
+
+학습 카드 CRUD에서 등록/조회 흐름을 MVC로 구현해 화면, 흐름 제어, 모델 책임을 나눈다.
+
+## 7. 추천 구조
+
+```text
+frontend/
+  src/app
+  src/features
+  src/shared/api
+  src/shared/store
+  src/shared/constants
+```
+
+```text
+backend/
+  src/main.ts
+  src/app.module.ts
+  src/study/study.controller.ts
+  src/study/study.service.ts
+  src/study/study.data.ts
+```
+
+## 8. 구현 체크리스트
+
+- 입력 처리 위치를 정한다.
+- View가 도메인 규칙을 직접 다루지 않게 한다.
+- Controller-Model 계약을 명시한다.
+
+## 9. 주의점
+
+- Controller가 커지면 곧 비대해진다.
+- View에서 비즈니스 로직이 새어나오기 쉽다.
+
+## 10. 연결 포인트
+
+- 상위 가이드: [Implementation Pattern Study Workspace](../README.md)
+- 기준 질문: 코드 수준에서 관심사를 어떻게 나눌 것인가
+- 예시 도메인: 코드 패턴 비교 학습
