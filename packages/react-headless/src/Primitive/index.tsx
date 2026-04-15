@@ -1,11 +1,5 @@
-import type { ElementType, ReactElement } from "react";
-import { cloneElement, forwardRef, isValidElement } from "react";
-
-export interface PrimitiveProps {
-  asChild?: boolean;
-}
-
-type PrimitivePropsWithRef<E extends ElementType> = React.ComponentPropsWithRef<E> & PrimitiveProps;
+import { cloneElement, forwardRef, isValidElement, type ElementType, type ReactElement } from "react";
+import type { PrimitiveProps, PrimitivePropsWithRef } from "./types";
 
 function createPrimitive<E extends ElementType>(node: E) {
   const Node = forwardRef<HTMLElement, PrimitivePropsWithRef<E>>((props, ref) => {
@@ -32,3 +26,5 @@ export const Primitive = {
   p: createPrimitive("p"),
   h2: createPrimitive("h2"),
 };
+
+export type { PrimitiveProps, PrimitivePropsWithRef } from "./types";

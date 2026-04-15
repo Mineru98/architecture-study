@@ -1,4 +1,6 @@
 import { createContext, useContext } from "react";
+import { FIELD_ERROR_MESSAGES } from "./constants";
+import { assertFieldContext } from "./helpers";
 
 export interface FieldContextValue {
   id?: string;
@@ -9,5 +11,5 @@ export interface FieldContextValue {
 export const FieldContext = createContext<FieldContextValue | null>(null);
 
 export function useFieldContext() {
-  return useContext(FieldContext);
+  return assertFieldContext(useContext(FieldContext), FIELD_ERROR_MESSAGES.missingContext);
 }

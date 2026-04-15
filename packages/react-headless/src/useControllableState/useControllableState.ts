@@ -1,15 +1,16 @@
 import { useCallback, useMemo, useState } from "react";
+import type { UseControllableStateParams, UseControllableStateResult } from "./types";
+import { getCurrentValue, isControlledValue } from "./helpers";
+import { DEFAULT_CONTROLLED_PARAM } from "./constants";
 
-export interface UseControllableStateParams<T> {
-  value?: T;
-  defaultValue: T;
-  onChange?: (nextValue: T) => void;
-}
-
-export function useControllableState<T>({ value, defaultValue, onChange }: UseControllableStateParams<T>) {
+export function useControllableState<T>({
+  value = DEFAULT_CONTROLLED_PARAM,
+  defaultValue,
+  onChange,
+}: UseControllableStateParams<T>) {
   const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
-  const isControlled = value !== undefined;
-  const currentValue = isControlled ? value : uncontrolledValue;
+  const isControlled = isControlledValue(value);
+  const currentValue = getCurrentValue(value, uncontrolledValue);
 
   const setValue = useCallback(
     (nextValue: T) => {
@@ -21,5 +22,5 @@ export function useControllableState<T>({ value, defaultValue, onChange }: UseCo
     [isControlled, onChange],
   );
 
-  return useMemo(() => [currentValue, setValue] as const, [currentValue, setValue]);
+  return useMemo(() => [currentValue, setValue] as UseControllableStateResult<T>, [currentValue, setValue]);
 }

@@ -1,11 +1,6 @@
-import type { ReactNode } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-
-export interface PortalProps {
-  children: ReactNode;
-  container?: HTMLElement | null;
-}
+import type { PortalProps } from "./types";
 
 export function Portal({ children, container }: PortalProps) {
   const [mounted, setMounted] = useState(false);
@@ -15,18 +10,13 @@ export function Portal({ children, container }: PortalProps) {
   }, []);
 
   const target = useMemo(() => {
-    if (container) {
-      return container;
-    }
-    if (typeof document === "undefined") {
-      return null;
-    }
+    if (container instanceof HTMLElement && container.isConnected) return container;
+    if (typeof document === "undefined") return null;
     return document.body;
   }, [container]);
 
-  if (!mounted || !target) {
-    return null;
-  }
-
+  if (!mounted || !target) return null;
   return createPortal(children, target);
 }
+
+export type { PortalProps } from "./types";
