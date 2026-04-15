@@ -64,6 +64,15 @@ backend/
 - 스트림이 많아지면 디버깅이 어려워진다.
 - Observable 추상화를 남용하면 팀 학습 비용이 커진다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:implementation:reactive-pattern:frontend
+bun run dev:implementation:reactive-pattern:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Implementation Pattern Study Workspace](../README.md)

@@ -64,6 +64,15 @@ backend/
 - 외부 공개 API에는 과도한 결합이 될 수 있다.
 - 계약 관리가 느슨하면 버전 충돌이 난다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:integration:rpc:frontend
+bun run dev:integration:rpc:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Integration Study Workspace](../README.md)

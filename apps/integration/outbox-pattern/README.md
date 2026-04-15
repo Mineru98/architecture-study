@@ -64,6 +64,15 @@ backend/
 - Poller 운영과 청소 전략이 필요하다.
 - 소비자 멱등성이 없으면 중복 발행에 취약하다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:integration:outbox-pattern:frontend
+bun run dev:integration:outbox-pattern:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Integration Study Workspace](../README.md)

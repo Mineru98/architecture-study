@@ -64,6 +64,15 @@ backend/
 - 소규모 프로젝트에는 구조 비용이 커질 수 있다.
 - 용어만 분리하고 데이터 흐름이 뒤섞이면 효과가 없다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:design_methodology:clean-architecture:frontend
+bun run dev:design_methodology:clean-architecture:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Design Methodology Study Workspace](../README.md)

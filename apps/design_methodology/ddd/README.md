@@ -64,6 +64,15 @@ backend/
 - 패턴만 흉내 내면 구조만 무거워진다.
 - 도메인 경계가 불명확하면 모듈 분리가 무의미해진다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:design_methodology:ddd:frontend
+bun run dev:design_methodology:ddd:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Design Methodology Study Workspace](../README.md)

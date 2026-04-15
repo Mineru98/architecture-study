@@ -64,6 +64,15 @@ backend/
 - 정책 수가 많아지면 가독성이 급격히 떨어진다.
 - 속성 누락 시 기본 거부 전략을 강제해야 한다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:access_control:abac:frontend
+bun run dev:access_control:abac:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Access Control Study Workspace](../README.md)

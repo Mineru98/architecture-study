@@ -64,6 +64,15 @@ backend/
 - ViewModel이 너무 커지면 새로운 God object가 된다.
 - 화면별로 재사용을 과하게 시도하면 복잡해진다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:implementation:mvvm:frontend
+bun run dev:implementation:mvvm:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Implementation Pattern Study Workspace](../README.md)

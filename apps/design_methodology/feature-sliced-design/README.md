@@ -64,6 +64,15 @@ backend/
 - 레이어 의미를 모르고 폴더만 따라 하면 실패한다.
 - shared가 만능 폴더가 되지 않도록 제한해야 한다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:design_methodology:feature-sliced-design:frontend
+bun run dev:design_methodology:feature-sliced-design:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Design Methodology Study Workspace](../README.md)

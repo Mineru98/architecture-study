@@ -64,6 +64,15 @@ backend/
 - 단순 CRUD까지 과하게 감싸면 의미 없는 추상화가 된다.
 - ORM의 장점을 모두 숨기려 하면 오히려 복잡해진다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:implementation:repository-pattern:frontend
+bun run dev:implementation:repository-pattern:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Implementation Pattern Study Workspace](../README.md)

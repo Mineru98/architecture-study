@@ -64,6 +64,15 @@ backend/
 - 플러그인 규격이 약하면 코어가 금방 오염된다.
 - 버전 호환성 검증이 없으면 운영이 어렵다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:design_methodology:microkernel-architecture:frontend
+bun run dev:design_methodology:microkernel-architecture:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Design Methodology Study Workspace](../README.md)

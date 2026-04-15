@@ -64,6 +64,15 @@ backend/
 - 클린/헥사고날과 혼용할 때 용어 혼란이 생길 수 있다.
 - 레이어 구분보다 실제 의존 방향이 더 중요하다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:design_methodology:onion-architecture:frontend
+bun run dev:design_methodology:onion-architecture:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Design Methodology Study Workspace](../README.md)

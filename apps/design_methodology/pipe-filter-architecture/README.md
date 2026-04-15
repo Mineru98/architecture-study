@@ -64,6 +64,15 @@ backend/
 - 필터가 상태를 공유하면 파이프라인 추론이 어려워진다.
 - 예외 처리 규칙이 없으면 실패 원인을 찾기 어렵다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:design_methodology:pipe-filter-architecture:frontend
+bun run dev:design_methodology:pipe-filter-architecture:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Design Methodology Study Workspace](../README.md)

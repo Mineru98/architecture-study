@@ -64,6 +64,15 @@ backend/
 - 도메인이 커지면 서비스 계층이 비대해질 수 있다.
 - 단순한 계층 분리는 기능 응집도를 떨어뜨릴 수 있다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:design_methodology:layered-architecture:frontend
+bun run dev:design_methodology:layered-architecture:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Design Methodology Study Workspace](../README.md)

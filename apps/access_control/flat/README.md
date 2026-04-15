@@ -64,6 +64,15 @@ backend/
 - 공통 권한 중복이 빠르게 쌓인다.
 - 운영 조직이 커지면 유지 비용이 커진다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:access_control:flat:frontend
+bun run dev:access_control:flat:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Access Control Study Workspace](../README.md)

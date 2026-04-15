@@ -64,6 +64,15 @@ backend/
 - Presenter가 View 세부 구현을 알기 시작하면 결합이 커진다.
 - 작은 화면에는 오히려 구조 비용이 클 수 있다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:implementation:mvp:frontend
+bun run dev:implementation:mvp:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Implementation Pattern Study Workspace](../README.md)

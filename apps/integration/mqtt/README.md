@@ -64,6 +64,15 @@ backend/
 - 브로커 장애 대응 전략이 필요하다.
 - 토픽 체계가 흐트러지면 운영이 어렵다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:integration:mqtt:frontend
+bun run dev:integration:mqtt:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Integration Study Workspace](../README.md)

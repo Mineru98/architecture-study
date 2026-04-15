@@ -38,3 +38,12 @@ Conditional grants:
 
 - RBAC만으로는 부족하지만 전면적인 정책 엔진 도입은 과한 쇼핑몰
 - 운영 예외가 주기적으로 생기는 성장 단계 서비스
+
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:access_control:hybrid-rbac:frontend
+bun run dev:access_control:hybrid-rbac:backend
+```

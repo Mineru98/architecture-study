@@ -47,3 +47,12 @@ platform-admin:
 
 - 본사 운영 조직과 판매자 조직이 비교적 명확한 쇼핑몰
 - 역할 중복을 줄이고 싶은 서비스
+
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:access_control:hierarchical-rbac:frontend
+bun run dev:access_control:hierarchical-rbac:backend
+```

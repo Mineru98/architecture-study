@@ -64,6 +64,15 @@ backend/
 - 이벤트 설계 오류는 나중에 고치기 어렵다.
 - 도메인 가치가 낮으면 구조 비용만 커진다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:implementation:event-sourcing:frontend
+bun run dev:implementation:event-sourcing:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Implementation Pattern Study Workspace](../README.md)

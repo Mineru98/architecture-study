@@ -64,6 +64,15 @@ backend/
 - Controller가 커지면 곧 비대해진다.
 - View에서 비즈니스 로직이 새어나오기 쉽다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:implementation:mvc:frontend
+bun run dev:implementation:mvc:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Implementation Pattern Study Workspace](../README.md)

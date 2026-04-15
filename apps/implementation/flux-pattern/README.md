@@ -64,6 +64,15 @@ backend/
 - Store가 커지면 다시 복잡해진다.
 - Flux와 Redux를 혼용하면 팀 혼란이 생길 수 있다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:implementation:flux-pattern:frontend
+bun run dev:implementation:flux-pattern:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Implementation Pattern Study Workspace](../README.md)

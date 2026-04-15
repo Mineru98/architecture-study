@@ -64,6 +64,15 @@ backend/
 - 예외 규칙이 누적되면 역할 폭증이 발생한다.
 - 리소스 소유권 판정은 역할만으로 해결하지 않는다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:access_control:rbac:frontend
+bun run dev:access_control:rbac:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Access Control Study Workspace](../README.md)

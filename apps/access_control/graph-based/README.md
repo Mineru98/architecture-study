@@ -64,6 +64,15 @@ backend/
 - 저장소 선택이 성능과 운영 난도를 좌우한다.
 - 관계가 복잡할수록 디버깅 도구가 필요하다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:access_control:graph-based:frontend
+bun run dev:access_control:graph-based:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Access Control Study Workspace](../README.md)

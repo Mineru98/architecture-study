@@ -64,6 +64,15 @@ backend/
 - 연결 상태 관리가 어렵다.
 - 이벤트 폭주 시 백프레셔 전략이 필요하다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:integration:websocket:frontend
+bun run dev:integration:websocket:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Integration Study Workspace](../README.md)

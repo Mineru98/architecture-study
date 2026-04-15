@@ -64,6 +64,15 @@ backend/
 - 공통화 압력이 너무 빠르면 슬라이스 경계가 무너진다.
 - 기능이 너무 작으면 오히려 파일 수만 늘어난다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:design_methodology:vertical-slice-architecture:frontend
+bun run dev:design_methodology:vertical-slice-architecture:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Design Methodology Study Workspace](../README.md)

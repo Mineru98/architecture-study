@@ -64,6 +64,15 @@ backend/
 - 관계 모델이 느슨하면 예외 규칙이 숨어든다.
 - 그래프 탐색은 성능 병목이 되기 쉽다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:access_control:rebac:frontend
+bun run dev:access_control:rebac:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Access Control Study Workspace](../README.md)

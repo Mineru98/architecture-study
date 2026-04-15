@@ -64,6 +64,15 @@ backend/
 - 단순한 CRUD에는 과한 구조일 수 있다.
 - 읽기 모델 지연을 숨기면 사용자 혼란이 생긴다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:implementation:cqrs:frontend
+bun run dev:implementation:cqrs:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Implementation Pattern Study Workspace](../README.md)

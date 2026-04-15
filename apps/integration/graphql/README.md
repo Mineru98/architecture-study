@@ -64,6 +64,15 @@ backend/
 - 스키마만 늘고 도메인 책임이 흐려질 수 있다.
 - 캐시 전략을 명확히 하지 않으면 성능 이슈가 생긴다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:integration:graphql:frontend
+bun run dev:integration:graphql:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Integration Study Workspace](../README.md)

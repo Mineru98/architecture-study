@@ -64,6 +64,15 @@ backend/
 - 단계를 과도하게 엄격히 적용하면 생산성이 떨어질 수 있다.
 - 도메인 컴포넌트와 디자인 시스템 컴포넌트를 혼동하지 않아야 한다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:design_methodology:atomic-design:frontend
+bun run dev:design_methodology:atomic-design:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Design Methodology Study Workspace](../README.md)

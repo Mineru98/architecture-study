@@ -64,6 +64,15 @@ backend/
 - 감사 로그가 없으면 사고 원인 추적이 어렵다.
 - 민감 권한은 위임 범위 제한이 없으면 위험하다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:access_control:delegation:frontend
+bun run dev:access_control:delegation:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Access Control Study Workspace](../README.md)

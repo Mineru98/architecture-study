@@ -64,6 +64,15 @@ backend/
 - 이벤트 의미가 모호하면 구독자 결합이 생긴다.
 - 누가 어떤 이벤트를 소비하는지 추적 도구가 필요하다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:integration:pub-sub:frontend
+bun run dev:integration:pub-sub:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Integration Study Workspace](../README.md)

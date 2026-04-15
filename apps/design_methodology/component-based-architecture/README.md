@@ -64,6 +64,15 @@ backend/
 - 공통화가 너무 빠르면 추상화가 무거워진다.
 - 컴포넌트명만 다르고 책임이 겹치면 관리가 어렵다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:design_methodology:component-based-architecture:frontend
+bun run dev:design_methodology:component-based-architecture:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Design Methodology Study Workspace](../README.md)

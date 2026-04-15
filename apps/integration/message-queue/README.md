@@ -64,6 +64,15 @@ backend/
 - 멱등성 없이 재시도하면 중복 처리 문제가 생긴다.
 - 처리 지연을 사용자에게 설명해야 한다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:integration:message-queue:frontend
+bun run dev:integration:message-queue:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Integration Study Workspace](../README.md)

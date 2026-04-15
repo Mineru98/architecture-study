@@ -64,6 +64,15 @@ backend/
 - 깊은 계층은 이해 비용이 높다.
 - 예외 권한이 많아지면 계층 구조가 오히려 불명확해진다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:access_control:hierarchical:frontend
+bun run dev:access_control:hierarchical:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Access Control Study Workspace](../README.md)

@@ -64,6 +64,15 @@ backend/
 - 상태 설계가 나쁘면 보일러플레이트만 늘어난다.
 - 작은 기능에 과도한 구조를 들이면 부담이 된다.
 
+## 실행 메모
+
+현재 프로젝트 루트에서 아래 명령으로 실행한다.
+
+```bash
+bun run dev:implementation:redux-pattern:frontend
+bun run dev:implementation:redux-pattern:backend
+```
+
 ## 10. 연결 포인트
 
 - 상위 가이드: [Implementation Pattern Study Workspace](../README.md)
