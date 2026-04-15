@@ -1,0 +1,36 @@
+{
+  "name": "@vibe-architecture/css",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Black and white token-based CSS foundation for vibe-architecture.",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": "./index.css",
+    "./index.css": "./index.css",
+    "./base.css": "./base.css",
+    "./all.css": "./all.css",
+    "./recipes/index.css": "./recipes/index.css",
+    "./vars": "./vars/index.ts",
+    "./vars/index.css": "./vars/index.css",
+    "./vars/component": "./vars/component/index.ts",
+    "./theming/index.css": "./theming/index.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.css",
+    "base.css",
+    "all.css",
+    "recipes",
+    "vars",
+    "theming"
+  ],
+  "keywords": [
+    "vibe-architecture",
+    "css",
+    "tokens",
+    "monochrome"
+  ]
+}

@@ -1,0 +1,29 @@
+:root {
+  color-scheme: light;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: var(--va-color-bg-default);
+  color: var(--va-color-fg-default);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--va-color-bg-default);
+  color: var(--va-color-fg-default);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}

@@ -1,0 +1,20 @@
+.va-field {
+  display: grid;
+  gap: var(--va-space-8);
+}
+
+.va-field__label {
+  color: var(--va-color-fg-default);
+  font-size: var(--va-font-size-14);
+  font-weight: var(--va-font-weight-500);
+}
+
+.va-field__description {
+  color: var(--va-color-fg-muted);
+  font-size: var(--va-font-size-12);
+}
+
+.va-field__error {
+  color: var(--va-color-danger);
+  font-size: var(--va-font-size-12);
+}

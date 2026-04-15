@@ -1,0 +1,12 @@
+:root {
+  --va-color-bg-default: var(--va-surface-page);
+  --va-color-bg-muted: var(--va-surface-muted);
+  --va-color-bg-strong: var(--va-surface-emphasis);
+  --va-color-fg-default: var(--va-foreground-default);
+  --va-color-fg-muted: var(--va-foreground-muted);
+  --va-color-fg-inverse: var(--va-foreground-inverse);
+  --va-color-border-default: var(--va-border-subtle);
+  --va-color-border-strong: var(--va-border-strong);
+  --va-color-shadow-xs: var(--va-shadow-xs);
+  --va-color-shadow-md: var(--va-shadow-md);
+}
