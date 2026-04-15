@@ -1,60 +1,49 @@
-### 계층적 RBAC (Hierarchical RBAC)
+# Hierarchical RBAC
 
-- 역할 간에 **상속 관계** 존재
-- 상위 역할이 하위 역할의 권한을 포함
-- 역할을 계층으로 구성
+## 개요
+
+Hierarchical RBAC는 상위 역할이 하위 역할의 권한을 상속하는 방식이다.
+
+## 쇼핑몰 역할 계층 예시
 
 ```
-        ┌──────────────┐
-        │    Admin     │
-        └──────────────┘
-               ▲
-        ┌──────┴──────┐
-    ┌───────┐     ┌────────┐
-    │Editor │     │Manager │
-    └───────┘     └────────┘
-        ▲              ▲
-        └──────┬───────┘
-           ┌────────┐
-           │ Viewer │
-           └────────┘
+platform-admin
+├─ ops-manager
+│  └─ cs-agent
+└─ settlement-manager
+
+seller-owner
+└─ seller-staff
 ```
 
-### 권한 상속
+## 권한 예시
 
-| 구분 | 일반 RBAC | 계층적 RBAC |
-|------|---------|-----------|
-| **상속** | 없음 | 있음 (상위→하위) |
-| **권한 정의** | 각 역할마다 개별 정의 | 상위 역할의 권한 자동 상속 |
-| **중복 제거** | 어려움 | 자동으로 처리 |
-
-**예시:**
 ```
-일반 RBAC:
-- Admin: [create, read, update, delete, approve]
-- Editor: [create, read, update, publish]  ← 공통 권한 중복
-- Viewer: [read]
+cs-agent:
+- order.read:all
+- refund.request:all
+- review.hide:all
 
-계층적 RBAC:
-- Admin: [create, read, update, delete, approve]
-  └─ Editor: [publish] (+ 상위의 create, read, update 상속)
-     └─ Viewer: (+ Editor의 권한 상속)
+ops-manager:
+- inherits cs-agent
+- refund.approve:low-risk
+- promotion.publish
+
+platform-admin:
+- inherits ops-manager
+- inherits settlement-manager
+- user.manage
+- role.manage
+- audit.read
 ```
 
----
+## 특징
 
-### 권한 관리의 복잡도
+- 공통 운영 권한을 상위 역할에 모을 수 있다.
+- 상위 역할 권한 변경이 하위 역할에 자동 반영된다.
+- 계층 설계를 잘못하면 실제 조직보다 복잡한 모델이 된다.
 
-- **상위 역할 권한 변경**이 자동으로 하위 역할에 반영
-- 공통 권한의 중복 제거
-- 관리가 더 효율적
+## 적합한 상황
 
----
-
-### 구현 복잡도
-
-| 측면 | 일반 RBAC | 계층적 RBAC |
-|------|---------|-----------|
-| **구현** | 단순 | 복잡 |
-| **성능** | 빠름 | 상속 체인 계산 필요 |
-| **유지보수** | 코드가 길어질 수 있음 | 코드 간결함 |
+- 본사 운영 조직과 판매자 조직이 비교적 명확한 쇼핑몰
+- 역할 중복을 줄이고 싶은 서비스

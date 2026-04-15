@@ -1,52 +1,56 @@
-### 일반 RBAC (Flat RBAC)
+# Flat RBAC
 
-- 모든 역할이 **동등한 수준**에 존재
-- 역할 간에 상속 관계가 없음
-- 각 역할은 독립적으로 정의됨
+## 개요
+
+Flat RBAC는 모든 역할이 같은 레벨에 있고, 상속 없이 각 역할의 권한을 독립적으로 정의하는 방식이다.
+
+## 쇼핑몰 역할 예시
 
 ```
-┌─────────────┐  ┌─────────────┐  ┌─────────────┐
-│   Admin     │  │   Editor    │  │   Viewer    │
-└─────────────┘  └─────────────┘  └─────────────┘
+customer
+seller
+seller-manager
+cs-agent
+settlement-manager
+platform-admin
 ```
 
----
+## 권한 예시
 
-### 권한 상속
-
-| 구분 | 일반 RBAC | 계층적 RBAC |
-|------|---------|-----------|
-| **상속** | 없음 | 있음 (상위→하위) |
-| **권한 정의** | 각 역할마다 개별 정의 | 상위 역할의 권한 자동 상속 |
-| **중복 제거** | 어려움 | 자동으로 처리 |
-
-**예시:**
 ```
-일반 RBAC:
-- Admin: [create, read, update, delete, approve]
-- Editor: [create, read, update, publish]  ← 공통 권한 중복
-- Viewer: [read]
+customer:
+- order.read:self
+- refund.request:self
+- review.create:self
 
-계층적 RBAC:
-- Admin: [create, read, update, delete, approve]
-  └─ Editor: [publish] (+ 상위의 create, read, update 상속)
-     └─ Viewer: (+ Editor의 권한 상속)
+seller:
+- product.read:own
+- product.create:own
+- product.update:own
+- order.read:own-store
+- order.confirm:own-store
+
+cs-agent:
+- order.read:all
+- payment.read:all
+- refund.request:all
+- review.hide:all
+
+platform-admin:
+- user.manage
+- role.manage
+- audit.read
+- refund.approve
+- settlement.approve
 ```
 
----
+## 특징
 
-### 권한 관리의 복잡도
+- 각 역할을 명시적으로 모두 정의해야 한다.
+- `order.read` 같은 공통 권한이 여러 역할에 반복된다.
+- 구현은 단순하지만 역할 수가 늘수록 관리 비용이 빠르게 커진다.
 
-- 각 역할의 권한을 **명시적으로 모두 정의**해야 함
-- 새로운 역할 추가 시 처음부터 권한을 지정
-- 권한 변경 시 영향받는 모든 역할을 찾아 수정
+## 적합한 상황
 
----
-
-### 구현 복잡도
-
-| 측면 | 일반 RBAC | 계층적 RBAC |
-|------|---------|-----------|
-| **구현** | 단순 | 복잡 |
-| **성능** | 빠름 | 상속 체인 계산 필요 |
-| **유지보수** | 코드가 길어질 수 있음 | 코드 간결함 |
+- 작은 쇼핑몰
+- 운영 조직이 단순한 초기 서비스
