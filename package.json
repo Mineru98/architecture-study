@@ -1,0 +1,50 @@
+{
+  "name": "architecture-study",
+  "private": true,
+  "packageManager": "bun@1.1.39",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "bootstrap": "bun install",
+    "typecheck": "bun -r tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "*",
+    "react-dom": "*",
+    "styled-components": "*",
+    "tailwindcss": "*",
+    "nanoid": "*",
+    "vite": "*",
+    "react-error-boundary": "*",
+    "zustand": "*",
+    "react-hook-form": "*",
+    "axios": "*",
+    "qs": "*",
+    "path-to-regexp": "*",
+    "es-toolkit": "*",
+    "dayjs": "*",
+    "uuid": "*",
+    "@tanstack/react-query": "*",
+    "@tanstack/react-query-devtools": "*",
+    "@nestjs/core": "*",
+    "@nestjs/config": "*",
+    "@nestjs/swagger": "*",
+    "@nestjs/platform-express": "*",
+    "@nestjs/typeorm": "*",
+    "@nestjs/throttler": "*",
+    "class-transformer": "*",
+    "class-validator": "*",
+    "rxjs": "*",
+    "reflect-metadata": "*",
+    "@nestjs/passport": "*",
+    "@nestjs/jwt": "*"
+  },
+  "devDependencies": {
+    "typescript": "*",
+    "@types/node": "*",
+    "@types/react": "*",
+    "@types/react-dom": "*"
+  }
+}
