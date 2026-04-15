@@ -3,12 +3,12 @@
   "private": true,
   "packageManager": "bun@1.1.39",
   "workspaces": [
-    "apps/*",
+    "apps/*/*",
     "packages/*"
   ],
   "scripts": {
     "bootstrap": "bun install",
-    "typecheck": "bun -r tsc --noEmit"
+    "typecheck": "bunx tsc --project tsconfig.json --noEmit"
   },
   "dependencies": {
     "react": "*",
@@ -28,12 +28,16 @@
     "uuid": "*",
     "@tanstack/react-query": "*",
     "@tanstack/react-query-devtools": "*",
+    "@nestjs/common": "*",
     "@nestjs/core": "*",
     "@nestjs/config": "*",
     "@nestjs/swagger": "*",
     "@nestjs/platform-express": "*",
     "@nestjs/typeorm": "*",
     "@nestjs/throttler": "*",
+    "@nestjs/microservices": "*",
+    "@nestjs/websockets": "*",
+    "@nestjs/platform-socket.io": "*",
     "class-transformer": "*",
     "class-validator": "*",
     "rxjs": "*",
@@ -45,6 +49,9 @@
     "typescript": "*",
     "@types/node": "*",
     "@types/react": "*",
-    "@types/react-dom": "*"
+    "@types/react-dom": "*",
+    "@types/styled-components": "*",
+    "@types/qs": "*",
+    "@vitejs/plugin-react": "*"
   }
 }
