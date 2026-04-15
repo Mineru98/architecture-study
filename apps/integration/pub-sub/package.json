@@ -1,0 +1,16 @@
+{
+  "name": "@architecture-study/integration-pub-sub",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "frontend:dev": "vite --config vite.config.ts",
+    "frontend:build": "vite build --config vite.config.ts",
+    "backend:dev": "bun --watch backend/src/main.ts",
+    "backend:start": "bun backend/src/main.ts",
+    "typecheck": "bunx tsc --project tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@vibe-architecture/react": "workspace:*",
+    "@vibe-architecture/css": "workspace:*"
+  }
+}
