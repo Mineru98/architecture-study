@@ -169,7 +169,13 @@
     "rxjs": "*",
     "reflect-metadata": "*",
     "@nestjs/passport": "*",
-    "@nestjs/jwt": "*"
+    "@nestjs/jwt": "*",
+    "typeorm": "*",
+    "pg": "*",
+    "ioredis": "*",
+    "passport": "*",
+    "passport-jwt": "*",
+    "passport-local": "*"
   },
   "devDependencies": {
     "typescript": "*",
@@ -178,6 +184,8 @@
     "@types/react-dom": "*",
     "@types/styled-components": "*",
     "@types/qs": "*",
-    "@vitejs/plugin-react": "*"
+    "@vitejs/plugin-react": "*",
+    "@types/passport-jwt": "*",
+    "@types/passport-local": "*"
   }
 }

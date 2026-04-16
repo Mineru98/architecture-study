@@ -40,6 +40,6 @@ environment.timeWindow = business-hours
 현재 프로젝트 루트에서 아래 명령으로 실행한다.
 
 ```bash
-bun run dev:access_control:flat-abac:frontend
-bun run dev:access_control:flat-abac:backend
+bun run dev:ac:flat-abac:frontend
+bun run dev:ac:flat-abac:backend
 ```

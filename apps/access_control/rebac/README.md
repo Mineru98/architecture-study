@@ -69,8 +69,8 @@ backend/
 현재 프로젝트 루트에서 아래 명령으로 실행한다.
 
 ```bash
-bun run dev:access_control:rebac:frontend
-bun run dev:access_control:rebac:backend
+bun run dev:ac:rebac:frontend
+bun run dev:ac:rebac:backend
 ```
 
 ## 10. 연결 포인트

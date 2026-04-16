@@ -53,6 +53,6 @@ platform-admin:
 현재 프로젝트 루트에서 아래 명령으로 실행한다.
 
 ```bash
-bun run dev:access_control:hierarchical-rbac:frontend
-bun run dev:access_control:hierarchical-rbac:backend
+bun run dev:ac:hierarchical-rbac:frontend
+bun run dev:ac:hierarchical-rbac:backend
 ```

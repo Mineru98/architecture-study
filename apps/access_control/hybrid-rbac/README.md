@@ -44,6 +44,6 @@ Conditional grants:
 현재 프로젝트 루트에서 아래 명령으로 실행한다.
 
 ```bash
-bun run dev:access_control:hybrid-rbac:frontend
-bun run dev:access_control:hybrid-rbac:backend
+bun run dev:ac:hybrid-rbac:frontend
+bun run dev:ac:hybrid-rbac:backend
 ```
