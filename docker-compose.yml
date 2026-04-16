@@ -1,0 +1,23 @@
+services:
+  postgres:
+    container_name: architecture-study-db
+    image: postgres:17
+    environment:
+      POSTGRES_USER: study
+      POSTGRES_PASSWORD: study
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker/init-databases.sql:/docker-entrypoint-initdb.d/init-databases.sql
+  redis:
+    container_name: architecture-study-redis
+    image: redis:alpine
+    ports:
+      - "6380:6379"
+    volumes:
+      - redisdata:/data
+
+volumes:
+  pgdata:
+  redisdata:

@@ -1,0 +1,34 @@
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Product, Order, User } from './common/entities';
+import { OutboxMessage } from './outbox/outbox.entity';
+import { RedisModule } from './common/redis.module';
+import { ProductModule } from './products/product.module';
+import { OrderModule } from './orders/order.module';
+import { AuthModule } from './auth/auth.module';
+import { OutboxModule } from './outbox/outbox.module';
+import { SeedService } from './seed';
+
+@Module({
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'study',
+      password: 'study',
+      database: 'integration',
+      synchronize: true,
+      autoLoadEntities: true,
+      logging: false,
+    }),
+    RedisModule,
+    TypeOrmModule.forFeature([Product, Order, User]),
+    ProductModule,
+    OrderModule,
+    AuthModule,
+    OutboxModule,
+  ],
+  providers: [SeedService],
+})
+export class AppModule {}
