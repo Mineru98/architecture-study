@@ -142,3 +142,4 @@ vite.config.ts.timestamp-*
 .omc/
 .playwright*
 *.lock
+.opencode
